@@ -1,7 +1,7 @@
 import { createToken } from "../utils/jwt.js"; //Import de JWT
 import { userResponseDto } from "../dto/userResponse.dto.js";//Import DTO de users
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     try {
       return res
         .status(201)
@@ -12,7 +12,7 @@ const register = async (req, res) => {
     }
   };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
       const user = req.user//Recibimos el user por request
       const token = createToken(user);//En caso que exista el email con la contraseña valida, creamos el token con jwt
@@ -27,7 +27,7 @@ const login = async (req, res) => {
     }
   };
 
-const current = async (req, res) => {
+const current = async (req, res, next) => {
     try {
       const user = userResponseDto(req.user);
       return res.status(200).json({ status: "success", payload: user });
@@ -38,7 +38,7 @@ const current = async (req, res) => {
     }
   };
 
-const loginGoogle = async (req, res) => {
+const loginGoogle = async (req, res, next) => {
     try {
       return res.status(200).json({ status: "success", payload: req.user });
     } catch (error) {
@@ -48,7 +48,7 @@ const loginGoogle = async (req, res) => {
     }
   };
 
-  const sessionDestroy =  async (req, res) => {
+  const sessionDestroy =  async (req, res, next) => {
     try {
       req.session.destroy();
   

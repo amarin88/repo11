@@ -1,4 +1,10 @@
-const notFoundError = (message = "Product Not found") => {
+const productNotFoundError = (message = "Product Not found") => {
+    const error = new Error(message);
+    error.status = 404;
+    return error;
+  };
+
+  const cartNotFoundError = (message = "Cart Not found") => {
     const error = new Error(message);
     error.status = 404;
     return error;
@@ -23,7 +29,8 @@ const notFoundError = (message = "Product Not found") => {
   };
   
   export default {
-    notFoundError,
+    productNotFoundError,
+    cartNotFoundError,
     badRequestError,
     unauthorizedError,
     forbiddenError

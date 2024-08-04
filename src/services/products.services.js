@@ -2,17 +2,15 @@ import productsRepository from "../persistences/mongo/repositories/products.repo
 import { productResponseDto } from "../dto/productResponse.dto.js";//Import de DTO de products
 import error from "../errors/customErrors.js"//Import config de errors
 
-//!
-//!
-
 const getAll = async (query , options) =>{
     const products = await productsRepository.getAll(query, options);
+    if(!products) throw error.productNotFoundError();
     return products;
 };//Función asyncrona para buscar todos los productos en la base de datos
 
 const getById = async ( id ) =>{
     const productData = await productsRepository.getById(id);
-    if(!productData) throw error.notFoundError();
+    if(!productData) throw error.productNotFoundError();
     const product = productResponseDto(productData);
     return product;
 };//Función asyncrona para buscar productos en la base de datos por id
@@ -29,6 +27,7 @@ const update = async (id, data) =>{
 
 const deleteOne = async ( id ) =>{
     const product = await productsRepository.deleteOne(id);
+    if(!product) throw error.productNotFoundError();
     return product;
 };//Función asyncrona para borrar un producto a la base de datos
 

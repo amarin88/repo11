@@ -9,6 +9,3 @@ export const isLogin = async (req = request, res = response, next) => {
   }
   
 };//Middleware de verificación si el usuario esta loggeado
-
-//!
-//!

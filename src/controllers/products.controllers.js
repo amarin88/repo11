@@ -1,7 +1,7 @@
 import { generateProductsMocks } from "../mocks/product.mock.js";//Import productos mediante mocking de faker
 import productsServices from "../services/products.services.js";//Import product services
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
     try {
       const { limit, page, sort, category, status } = req.query;//Obtiene los filtros por query
       const options = {
@@ -36,13 +36,14 @@ const getById = async (req, res, next) => {
     try {
       const { pid } = req.params;//Obtiene el parámetro de la ruta "pid" (product id)
       const product = await productsServices.getById(pid);//Obtiene el producto por su ID de la base de datos
+      res.status(200).json({ status: "success", payload: product });//Responde con el producto obtenido
     } catch (error) {
       console.log(error);//Registra cualquier error en la consola
       next(error);//Continua el flujo al middleware de errors
     }
   };
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
     try {
       const product = req.body;//Obtiene el body de la request que contiene los datos del producto
       const newProduct = await productsServices.create(product);//Agrega el nuevo producto a la base de datos
@@ -54,7 +55,7 @@ const create = async (req, res) => {
     }
   };
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
     try {
       const { pid } = req.params;//Obtiene el parámetro de la ruta "pid" (product id)
       const productData = req.body;//Obtiene el body de la request que contiene los nuevos datos del producto
@@ -67,7 +68,7 @@ const update = async (req, res) => {
     }
   };
 
-const deleteOne = async (req, res) => {
+const deleteOne = async (req, res, next) => {
     try {
       const { pid } = req.params;//Obtiene el parámetro de la ruta "pid" (product id)
       const product = await productsServices.deleteOne(pid);//Obtiene el producto por id y lo elimina de la base de datos  
@@ -81,7 +82,7 @@ const deleteOne = async (req, res) => {
     }
   };
 
-const createProductsMocks = async (req, res) =>{
+const createProductsMocks = async (req, res, next) =>{
   try {
       const products = generateProductsMocks(100);
       return res.status(200).json({status: "success" , products});

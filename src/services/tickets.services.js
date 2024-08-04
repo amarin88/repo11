@@ -14,6 +14,3 @@ const createTicket = async (userMail, totalCart) =>{
 export default {
     createTicket,
 };
-
-//!
-//!

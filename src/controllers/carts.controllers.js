@@ -1,7 +1,7 @@
 import cartsServices from "../services/carts.services.js";//Import cart services
 import ticketsServices from "../services/tickets.services.js"//Import ticket services
 
-const createCart = async (req, res) => {
+const createCart = async (req, res, next) => {
   try {
     const cart = await cartsServices.createCart(); //Crea el carrito en la base de datos
 
@@ -12,7 +12,7 @@ const createCart = async (req, res) => {
     }
   };
 
-const addProductToCart = async (req, res) => {
+const addProductToCart = async (req, res, next) => {
   try {
     const { cid, pid } = req.params; // Obtiene los parámetros de la ruta "cid"(cart id) y "pid" (product id)
 
@@ -25,7 +25,7 @@ const addProductToCart = async (req, res) => {
   }
 };
 
-const updateQuantityProductInCart = async (req, res) => {
+const updateQuantityProductInCart = async (req, res, next) => {
   try {
     const { cid, pid } = req.params; //Obtenemos el id del carrito y del producto por parametro
     const { quantity } = req.body; //Obtenemos la quantity por el cuerpo de la solicitud
@@ -43,7 +43,7 @@ const updateQuantityProductInCart = async (req, res) => {
   }
 };
 
-const deleteProductInCart = async (req, res) => {
+const deleteProductInCart = async (req, res, next) => {
   try {
     const { cid, pid } = req.params; // Obtiene el parámetro de la ruta "cid" (cart id) y "pid" (product id)
     const cart = await cartsServices.deleteProductInCart(cid, pid); //Elimina el producto del carrito
@@ -55,7 +55,7 @@ const deleteProductInCart = async (req, res) => {
   }
 };
 
-const getCartById = async (req, res) => {
+const getCartById = async (req, res, next) => {
   try {
     const { cid } = req.params; // Obtiene el parámetro de la ruta "cid" (cart id)
     const cart = await cartsServices.getCartById(cid); //Obtiene el carrito por id en la base de datos
@@ -67,7 +67,7 @@ const getCartById = async (req, res) => {
   }
 };
 
-const deleteAllProductsInCart = async (req, res) => {
+const deleteAllProductsInCart = async (req, res, next) => {
   try {
     const { cid } = req.params; // Obtiene el parámetro de la ruta "cid" (cart id)
     const cart = await cartsServices.deleteAllProductsInCart(cid); //Obtiene el carrito por id y borra los productos
@@ -79,7 +79,7 @@ const deleteAllProductsInCart = async (req, res) => {
   }
 };
 
-const purchaseCart = async (req,res) =>{
+const purchaseCart = async (req,res, next) =>{
   try {
     const { cid } = req.params; // Obtiene el parámetro de la ruta "cid" (cart id)
     const cart = await cartsServices.getCartById(cid);//Busca el carrito por id

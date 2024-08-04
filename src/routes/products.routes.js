@@ -8,6 +8,8 @@ const router = Router();//Creación del router
 
 router.get("/", productsController.getAll );//Ruta para obtener todos los productos
 
+router.get("/mockingproducts", productsController.createProductsMocks ); //Ruta de los products creados con faker
+
 router.get("/:pid", productsController.getById);//Ruta para obtener un producto por su ID
 
 router.post("/", passportCall("jwt"), authorization("admin"), productDataValidator, productsController.create);//Ruta para agregar un nuevo producto
@@ -15,5 +17,6 @@ router.post("/", passportCall("jwt"), authorization("admin"), productDataValidat
 router.put("/:pid", passportCall("jwt"), authorization("admin"), productsController.update);//Ruta para actualizar un producto existente
 
 router.delete("/:pid", passportCall("jwt"), authorization("admin"), productsController.deleteOne); //Ruta para eliminar un producto por su ID
+
 
 export default router;//Export del router

@@ -1,7 +1,7 @@
 import { sendMail } from "../utils/sendMails.js";//Import config de envío de emails
 
 
-const sendEmail= async (req,res) =>{
+const sendEmail= async (req,res, next) =>{
   
     const { name } = req.body;
     const template = `

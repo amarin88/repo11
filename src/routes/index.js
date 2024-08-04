@@ -8,9 +8,6 @@ import cartsRoutes from "./carts.routes.js";
 import sessionRoutes from "./session.routes.js";
 // Importación de las rutas de los emails
 import emailsRoutes from "./emails.routes.js";
-// Importación de las rutas de los mocks de productos
-import mockingProductsRoutes from "./mockingProducts.routes.js"
-
 
 // Creación del router
 const router = Router();
@@ -23,8 +20,6 @@ router.use("/carts", cartsRoutes);
 router.use("/session", sessionRoutes);
 // Utiliza las rutas de carritos bajo el prefijo "/emails"
 router.use("/emails", emailsRoutes);
-// Utiliza las rutas de carritos bajo el prefijo "/mockingproducts"
-router.use("/mockingproducts", mockingProductsRoutes);
 
 // Exporta el router
 export default router;

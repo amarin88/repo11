@@ -7,11 +7,8 @@ export const checkProductAndCart = async (req = request, res = response, next) =
   const product = await productsServices.getById(pid);//Verificamos si el producto se encuentra por id
   const cart = await cartsServices.getCartById(cid);//Verificamos si el cart se encuentra por id
 
-  if (!product) return res.status(404).json({ status: "Error", response: `Product with ID ${pid} doesn't found.` });//Si no se encuentra el producto retornamos error
-  if (!cart) return res.status(404).json({ status: "Error", response: `Cart with ID ${cid} not found.` });//Si no se encuentra el carrito retornamos error
+  if(!cart) throw error.cartNotFoundError();
+  if(!product) throw error.productNotFoundError();
 
   next();//En el caso de que la verificacion este ok , pasa el middleware
 };
-
-//!
-//!
